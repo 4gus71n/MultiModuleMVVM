@@ -1,0 +1,28 @@
+/**
+ * This gradle file contains the ext variables with the libraries versions and the project configuration
+ */
+
+ext.versions = [
+    //region Android versions
+    compileSdkVersion : 27,
+    applicationId : 'com.kimboo.mvvmmultilayer',
+    minSdkVersion : 21,
+    targetSdkVersion : 27,
+    versionCode : 1,
+    versionName : '1.0',
+    testInstrumentationRunner : 'android.support.test.runner.AndroidJUnitRunner',
+    multiDexEnabled : true,
+    //endregion
+]
+
+ext.libraries = [
+    //region Dependency versions
+    daggerVersion : '2.15',
+    roomVersion : "1.1.0",
+    pagingVersion : "1.0.0",
+    lifecycleVersion : "1.1.1",
+    googleSupportVersion : '27.1.1',
+    glideVersion : "4.7.1",
+    retrofitVersion : "2.3.0"
+    //endregion
+]

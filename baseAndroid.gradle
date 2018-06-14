@@ -1,0 +1,19 @@
+/**
+ * This gradle file contains the basic project configuration that all modules should use
+ */
+apply from: "$rootDir/baseExt.gradle"
+
+android {
+    compileSdkVersion versions.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
+        testInstrumentationRunner versions.testInstrumentationRunner
+        multiDexEnabled versions.multiDexEnabled
+    }
+
+    dataBinding.enabled = true
+}

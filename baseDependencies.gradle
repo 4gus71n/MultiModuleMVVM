@@ -1,0 +1,36 @@
+/**
+ * This gradle file contains the very basic dependencies for each module
+ */
+
+dependencies {
+    apply from: "$rootDir/baseExt.gradle"
+
+    //region Dagger2 dependencies
+    implementation "com.google.dagger:dagger:$libraries.daggerVersion"
+    implementation "com.google.dagger:dagger-android:$libraries.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$libraries.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$libraries.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$libraries.daggerVersion"
+    //endregion
+
+    //region Support dependencies
+    implementation "com.android.support:recyclerview-v7:$libraries.googleSupportVersion"
+    implementation "com.android.support:appcompat-v7:$libraries.googleSupportVersion"
+    implementation "com.android.support:support-v13:$libraries.googleSupportVersion"
+    implementation "com.android.support:design:$libraries.googleSupportVersion"
+    implementation "com.android.support:cardview-v7:$libraries.googleSupportVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    //endregion
+
+    //region DataBinding/Lifecycle dependencies
+    implementation "android.arch.core:runtime:$libraries.lifecycleVersion"
+    implementation "android.arch.lifecycle:extensions:$libraries.lifecycleVersion"
+    api "android.arch.lifecycle:viewmodel:$libraries.lifecycleVersion"
+    implementation "android.arch.lifecycle:livedata:$libraries.lifecycleVersion"
+    implementation "android.arch.lifecycle:livedata-core:$libraries.lifecycleVersion"
+    implementation "android.arch.lifecycle:reactivestreams:$libraries.lifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$libraries.lifecycleVersion"
+    kapt "com.android.databinding:compiler:$android_plugin_version"
+    //endregion
+
+}

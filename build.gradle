@@ -1,0 +1,40 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.2.41'
+    ext.android_plugin_version = '3.1.3'
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$android_plugin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    apply from: "$rootDir/baseExt.gradle"
+
+    configurations.all {
+        //Some of the libraries that we are using are using a different run gradlew <MODULE>:dependencies to check'em
+        resolutionStrategy.force "com.android.support:appcompat-v7:$libraries.googleSupportVersion"
+        resolutionStrategy.force "com.android.support:support-core-utils:$libraries.googleSupportVersion"
+        resolutionStrategy.force "android.arch.lifecycle:runtime:$libraries.lifecycleVersion"
+        resolutionStrategy.force "android.arch.lifecycle:livedata-core:$libraries.lifecycleVersion"
+        resolutionStrategy.force "android.arch.lifecycle:viewmodel:$libraries.lifecycleVersion"
+    }
+
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
