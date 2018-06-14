@@ -14,7 +14,7 @@ import javax.inject.Singleton
  * Email: agustin.tomas.larghi@gmail.com
  */
 @Singleton
-@Component(modules = arrayOf(PostMenuModule::class), dependencies = arrayOf(BaseSubComponent::class))
+@Component(modules = [(PostMenuModule::class)], dependencies = arrayOf(BaseSubComponent::class))
 interface PostMenuComponent {
 
     fun injectFragment(postMenuActivityFragment: PostMenuActivityFragment)

@@ -15,20 +15,6 @@ android {
         }
     }
 
-    dexOptions {
-        javaMaxHeapSize "4g"
-        preDexLibraries = false
-    }
-
-    packagingOptions {
-        exclude 'META-INF/rxjava.properties'
-    }
-
-
-    lintOptions {
-        abortOnError false
-    }
-
     buildTypes {
         release {
             minifyEnabled true

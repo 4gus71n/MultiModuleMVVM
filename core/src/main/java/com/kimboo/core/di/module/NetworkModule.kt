@@ -1,9 +1,11 @@
 package com.kimboo.core.di.module
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.moczul.ok2curl.CurlInterceptor
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -50,12 +52,8 @@ class NetworkModule() {
     @Provides
     @Named("curlInterceptor")
     protected fun provideCurlInterceptor(): Interceptor {
-        return Interceptor { chain ->
-            var request = chain.request()
-            request = request.newBuilder()
-                    .header("Cache-Control", "public, max-age=60")
-                    .build()
-            chain.proceed(request)
+        return CurlInterceptor { curlMessage ->
+            Log.d("CURL", curlMessage)
         }
     }
 

@@ -10,8 +10,7 @@ import javax.inject.Singleton
  * Email: agustin.tomas.larghi@gmail.com
  */
 @Singleton
-@Component(modules = arrayOf(AppModule::class, NetworkModule::class, RetrofitServiceModule::class,
-        RoomModule::class, RepositoryModule::class))
+@Component(modules = [(AppModule::class), (NetworkModule::class), (RetrofitServiceModule::class), (RoomModule::class), (RepositoryModule::class)])
 interface AppComponent {
 
     fun baseSubComponentBuilder(): BaseSubComponent.Builder

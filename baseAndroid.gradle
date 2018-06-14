@@ -15,5 +15,39 @@ android {
         multiDexEnabled versions.multiDexEnabled
     }
 
+    /**
+     * We dont want to store the UT results anywhere, this is going to speed up the build process
+     */
+    testOptions.unitTests.all {
+        reports.html.enabled = false
+        reports.junitXml.enabled = false
+        maxParallelForks = 4 //Speeds up yhe UT by running'em into 4 different forks
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    /**
+     * This two options are basically disabling the lint validation during building time, we may want
+     * to enable them from time to time, to check on the lint errors
+     */
+    lintOptions {
+        tasks.lint.enabled = false
+        abortOnError false
+    }
+
+    /**
+     * Speeds up the building time
+     */
+    kapt {
+        useBuildCache = true
+    }
+
     dataBinding.enabled = true
 }
