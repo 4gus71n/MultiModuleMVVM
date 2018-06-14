@@ -20,6 +20,13 @@ buildscript {
 allprojects {
     apply from: "$rootDir/baseExt.gradle"
 
+    afterEvaluate {
+        tasks.withType(JavaCompile) {
+            options.incremental = true // one flag, and things will get MUCH faster
+            options.fork = true
+        }
+    }
+
     configurations.all {
         //Some of the libraries that we are using are using a different run gradlew <MODULE>:dependencies to check'em
         resolutionStrategy.force "com.android.support:appcompat-v7:$libraries.googleSupportVersion"

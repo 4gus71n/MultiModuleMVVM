@@ -21,12 +21,12 @@ android {
     testOptions.unitTests.all {
         reports.html.enabled = false
         reports.junitXml.enabled = false
-        maxParallelForks = 4 //Speeds up yhe UT by running'em into 4 different forks
+        maxParallelForks = 7 //Speeds up yhe UT by running'em into 7 different forks
     }
 
     dexOptions {
         javaMaxHeapSize "4g"
-        preDexLibraries = false
+        preDexLibraries = true
     }
 
     packagingOptions {
@@ -47,6 +47,10 @@ android {
      */
     kapt {
         useBuildCache = true
+    }
+
+    compileOptions {
+        incremental = true //Enables incremental builds so we don't need to rebuild unchanged modules
     }
 
     dataBinding.enabled = true
