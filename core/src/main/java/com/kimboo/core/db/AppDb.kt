@@ -5,15 +5,17 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
+import com.kimboo.core.model.ImgurGalleryImage
 import com.kimboo.core.model.ImgurGalleryPost
+import com.kimboo.core.model.ImgurGalleryTag
 
 /**
  * Created by Agustin Tomas Larghi on 28/5/2018.
  * Email: agustin.tomas.larghi@gmail.com
  */
 @Database(
-        entities = [(ImgurGalleryPost::class)],
-        version = 2,
+        entities = [(ImgurGalleryPost::class), (ImgurGalleryImage::class), (ImgurGalleryTag::class)],
+        version = 16,
         exportSchema = false
 )
 @TypeConverters(RoomTypeConverters::class)

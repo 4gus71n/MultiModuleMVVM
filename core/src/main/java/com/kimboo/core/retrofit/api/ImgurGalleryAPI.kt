@@ -14,7 +14,7 @@ import retrofit2.http.Query
 interface ImgurGalleryAPI {
 
     //region Unsorted API endpoints
-    @GET("/gallery/search/{sort}/{window}/{page}")
+    @GET("gallery/search/{sort}/{window}/{page}")
     fun gallerySearch(@Path("sort") sort: String = "top",
                       @Path("window") window: String = "all",
                       @Path("page") page: Int = 0,

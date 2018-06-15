@@ -146,9 +146,6 @@ class ApiImgurGalleryImageResponse {
     @SerializedName("views")
     @Expose
     var views: Int? = null
-    @SerializedName("bandwidth")
-    @Expose
-    var bandwidth: Int? = null
     @SerializedName("vote")
     @Expose
     var vote: Boolean? = null

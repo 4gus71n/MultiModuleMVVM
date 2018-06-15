@@ -5,6 +5,8 @@
 dependencies {
     apply from: "$rootDir/baseExt.gradle"
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     //region Dagger2 dependencies
     implementation "com.google.dagger:dagger:$libraries.daggerVersion"
     implementation "com.google.dagger:dagger-android:$libraries.daggerVersion"

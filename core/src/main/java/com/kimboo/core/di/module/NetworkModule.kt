@@ -78,12 +78,14 @@ class NetworkModule() {
     @Provides
     @Singleton
     protected fun provideOkHttpClient(cache: okhttp3.Cache,
+                                      @Named("authInterceptor") authInterceptor: Interceptor,
                                       @Named("curlInterceptor") curlInterceptor: Interceptor,
                                       @Named("cacheInterceptor") cacheInterceptor: Interceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
         if (ENABLE_OKHTTP_CACHE) {
             builder.cache(cache)
         }
+        builder.addInterceptor(authInterceptor)
         builder.addInterceptor(curlInterceptor)
         builder.connectTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS)
         return builder.build()

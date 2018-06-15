@@ -8,6 +8,8 @@ import com.kimboo.core.model.ImgurGalleryPost
 import com.kimboo.core.retrofit.api.ImgurGalleryAPI
 import com.kimboo.core.retrofit.mapping.mapApiImgurGalleryResponse
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * I've a small naming convention here:
@@ -27,16 +29,19 @@ class ImgurGalleryRepository(val imgurGalleryAPI: ImgurGalleryAPI, val imgurGall
             .subscribe({imgurGalleryPosts ->
                 imgurGalleryDAO.insertGallerySearch(imgurGalleryPosts)
             }, {imgurGalleryPostError ->
-                networkStatus.postValue("Something went wrong with RxJava ${imgurGalleryPostError.localizedMessage}")
+                networkStatus.postValue("Something went wrong with RxJava ${imgurGalleryPostError.toString()}: ${imgurGalleryPostError.localizedMessage}")
             })
 
         return getGallerySearch(query)
     }
 
-    fun getGallerySearch(query: String) = LiveDataReactiveStreams.fromPublisher(imgurGalleryDAO.gallerySearch(query))
+    fun getGallerySearch(query: String) = LiveDataReactiveStreams
+            .fromPublisher(imgurGalleryDAO.gallerySearch("%$query%"))
 
     fun fetchGallerySearch(sort: String, window: String, page: Int, query: String): Observable<List<ImgurGalleryPost>> {
         return imgurGalleryAPI.gallerySearch(sort, window, page, query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 //TODO Extract into Extended Function
                 .flatMap { response ->
                     if (response.isSuccessful) {

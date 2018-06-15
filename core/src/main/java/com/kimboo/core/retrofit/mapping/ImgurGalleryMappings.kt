@@ -16,10 +16,13 @@ import java.util.*
 fun mapApiImgurGalleryResponse(apiResponse: ApiImgurGalleryResponse?): List<ImgurGalleryPost> {
     return apiResponse?.data?.map { apiImgurGalleryPostResponse ->
         with(apiImgurGalleryPostResponse) {
-            ImgurGalleryPost(id, title, description, datetime, cover, coverWidth, coverHeight, accountUrl,
+            val imgurGalleryPost = ImgurGalleryPost(id, title, description, datetime, cover, coverWidth, coverHeight, accountUrl,
                     accountId, privacy, layout, views, link, ups, downs, points, score, isAlbum, vote, favorite,
                     nsfw, section, commentCount, favoriteCount, topic, topicId, imagesCount, inGallery, isAd,
-                    mapApiImgurGalleryTagsResponse(tags), inMostViral, mapApiImgurGalleryImagesResponse(images))
+                    inMostViral)
+            imgurGalleryPost.tags = mapApiImgurGalleryTagsResponse(tags)
+            imgurGalleryPost.images = mapApiImgurGalleryImagesResponse(images)
+            imgurGalleryPost
         }
     } ?: ArrayList()
 }
@@ -27,10 +30,12 @@ fun mapApiImgurGalleryResponse(apiResponse: ApiImgurGalleryResponse?): List<Imgu
 fun mapApiImgurGalleryImagesResponse(images: List<ApiImgurGalleryImageResponse>?): List<ImgurGalleryImage> {
     return images?.map { apiImgurGalleryImageResponse ->
         with (apiImgurGalleryImageResponse) {
-            ImgurGalleryImage(id, title, description, datetime, type, animated, width, height,
-                    mp4Size, views, bandwidth, vote, favorite, nsfw, section, accountUrl, accountId, isAd,
-                    inMostViral, hasSound, mapApiImgurGalleryTagsResponse(tags), adType, adUrl, inGallery,
+            val imgurGalleryImage = ImgurGalleryImage(id, title, description, datetime, type, animated, width, height,
+                    mp4Size, views, vote, favorite, nsfw, section, accountUrl, accountId, isAd,
+                    inMostViral, hasSound, adType, adUrl, inGallery,
                     link, mp4, gifv, mp4Size, looping, commentCount, favoriteCount, ups, downs, points, score)
+            imgurGalleryImage.tags = mapApiImgurGalleryTagsResponse(tags)
+            imgurGalleryImage
         }
     } ?: ArrayList()
 }

@@ -15,6 +15,10 @@ android {
         multiDexEnabled versions.multiDexEnabled
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
     /**
      * We dont want to store the UT results anywhere, this is going to speed up the build process
      */
