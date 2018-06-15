@@ -1,7 +1,7 @@
 package com.kimboo.core.di.component
 
 import android.content.Context
-import com.kimboo.core.repository.ImgurRepository
+import com.kimboo.core.repository.ImgurGalleryRepository
 import dagger.Subcomponent
 
 /**
@@ -11,7 +11,7 @@ import dagger.Subcomponent
 @Subcomponent
 interface BaseSubComponent {
 
-    val imgurRepository: ImgurRepository
+    val imgurGalleryRepository: ImgurGalleryRepository
 
     val context: Context
 

@@ -3,8 +3,8 @@ package com.kimboo.postmenu.ui
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,9 +46,12 @@ class PostMenuActivityFragment : Fragment() {
         viewModel = ViewModelProviders.of(this, viewModelProvider).get(PostMenuViewModel::class.java)
         dataBinding.viewModel = viewModel
 
-        viewModel.uiEvents.observe(this, Observer {
-            //TODO REMOVE
-            Snackbar.make(getView()!!, it!!, Snackbar.LENGTH_LONG).show()
+        viewModel.networkEvents.observe(this, Observer { networkEvent ->
+            Log.d("SARASA", networkEvent)
+        })
+
+        viewModel.hookGallerySearch().observe(this, Observer { imgurGalleryPosts ->
+            Log.d("SARASA", imgurGalleryPosts.toString())
         })
     }
 }

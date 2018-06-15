@@ -1,7 +1,7 @@
 package com.kimboo.postmenu.di
 
 import com.kimboo.core.di.component.BaseSubComponent
-import com.kimboo.core.repository.ImgurRepository
+import com.kimboo.core.repository.ImgurGalleryRepository
 import com.kimboo.postmenu.ui.PostMenuActivityFragment
 import com.kimboo.postmenu.ui.PostMenuViewModel
 import dagger.Component
@@ -30,8 +30,8 @@ interface PostMenuComponent {
 class PostMenuModule {
 
     @Provides
-    fun provideViewModelProvider(imgurRepository: ImgurRepository) : PostMenuViewModel.ViewModelProvider {
-        return PostMenuViewModel.ViewModelProvider(imgurRepository)
+    fun provideViewModelProvider(imgurGalleryRepository: ImgurGalleryRepository) : PostMenuViewModel.ViewModelProvider {
+        return PostMenuViewModel.ViewModelProvider(imgurGalleryRepository)
     }
 
 }

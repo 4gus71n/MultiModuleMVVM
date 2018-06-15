@@ -14,15 +14,9 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import java.security.KeyManagementException
-import java.security.NoSuchAlgorithmException
-import java.security.cert.CertificateException
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
 
 /**
  * Created by Agustin on 01/11/2016.
@@ -58,6 +52,18 @@ class NetworkModule() {
     }
 
     @Provides
+    @Named("authInterceptor")
+    protected fun providesAuthInterceptor(): Interceptor {
+        return Interceptor { chain ->
+            var request = chain.request()
+            request = request.newBuilder()
+                    .header("Authorization", "Client-ID 6ea78556ea84b48")
+                    .build()
+            chain.proceed(request)
+        }
+    }
+
+    @Provides
     @Named("cacheInterceptor")
     protected fun provideCacheInterceptor(): Interceptor {
         return Interceptor { chain ->
@@ -78,52 +84,16 @@ class NetworkModule() {
         if (ENABLE_OKHTTP_CACHE) {
             builder.cache(cache)
         }
-
         builder.addInterceptor(curlInterceptor)
-
-        try {
-            setUnsafeSslCertificates(builder)
-        } catch (e: Exception) {
-            throw RuntimeException("Couldn't build SSL certificates")
-        }
-
         builder.connectTimeout(30, TimeUnit.SECONDS).readTimeout(30, TimeUnit.SECONDS)
-
         return builder.build()
-    }
-
-    @Throws(NoSuchAlgorithmException::class, KeyManagementException::class)
-    private fun setUnsafeSslCertificates(builder: OkHttpClient.Builder) {
-        // Create queryAlcoholic trust manager that does not validate certificate chains
-        val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
-            @Throws(CertificateException::class)
-            override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
-            }
-
-            @Throws(CertificateException::class)
-            override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
-            }
-
-            override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate> {
-                return arrayOf()
-            }
-        })
-
-        // Install the all-trusting trust manager
-        val sslContext = SSLContext.getInstance("SSL")
-        sslContext.init(null, trustAllCerts, java.security.SecureRandom())
-        // Create an ssl socket factory with our all-trusting manager
-        val sslSocketFactory = sslContext.socketFactory
-
-        builder.sslSocketFactory(sslSocketFactory)
-        builder.hostnameVerifier { hostname, session -> true }
     }
 
     @Provides
     @Singleton
     protected fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("http://www.thecocktaildb.com/")  //TODO move to the build.gradle
+                .baseUrl("https://api.imgur.com/3/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)

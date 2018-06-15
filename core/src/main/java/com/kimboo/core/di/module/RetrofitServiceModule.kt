@@ -1,6 +1,6 @@
 package com.kimboo.core.di.module
 
-import com.kimboo.core.retrofit.api.ImgurAPI
+import com.kimboo.core.retrofit.api.ImgurGalleryAPI
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -12,8 +12,8 @@ import retrofit2.Retrofit
 class RetrofitServiceModule {
 
     @Provides
-    fun provideImgurAPI(retrofit: Retrofit): ImgurAPI {
-        return retrofit.create(ImgurAPI::class.java)
+    fun provideImgurAPI(retrofit: Retrofit): ImgurGalleryAPI {
+        return retrofit.create(ImgurGalleryAPI::class.java)
     }
 
 }
