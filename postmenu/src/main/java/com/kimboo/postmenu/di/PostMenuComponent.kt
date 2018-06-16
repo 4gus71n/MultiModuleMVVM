@@ -1,12 +1,14 @@
 package com.kimboo.postmenu.di
 
+import android.arch.lifecycle.ViewModel
 import com.kimboo.core.di.component.BaseSubComponent
-import com.kimboo.core.repository.ImgurGalleryRepository
+import com.kimboo.core.di.component.ViewModelKey
 import com.kimboo.postmenu.ui.PostMenuActivityFragment
 import com.kimboo.postmenu.ui.PostMenuViewModel
+import dagger.Binds
 import dagger.Component
 import dagger.Module
-import dagger.Provides
+import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 /**
@@ -27,11 +29,11 @@ interface PostMenuComponent {
 }
 
 @Module
-class PostMenuModule {
+abstract class PostMenuModule {
 
-    @Provides
-    fun provideViewModelProvider(imgurGalleryRepository: ImgurGalleryRepository) : PostMenuViewModel.ViewModelProvider {
-        return PostMenuViewModel.ViewModelProvider(imgurGalleryRepository)
-    }
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostMenuViewModel::class)
+    abstract fun bindPostMenuViewModel(postMenuViewModel: PostMenuViewModel): ViewModel
 
 }

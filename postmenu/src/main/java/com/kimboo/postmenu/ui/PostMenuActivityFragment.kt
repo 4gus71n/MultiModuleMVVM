@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.kimboo.core.MyApp
+import com.kimboo.core.di.module.MyViewModelFactory
 import com.kimboo.postmenu.R
 import com.kimboo.postmenu.databinding.FragmentPostMenuBinding
 import com.kimboo.postmenu.di.DaggerPostMenuComponent
@@ -23,7 +24,7 @@ class PostMenuActivityFragment : Fragment() {
     //lateinit var viewModelFactory ¿ //region ViewModel DI declaration
 
     @Inject
-    lateinit var viewModelProvider: PostMenuViewModel.ViewModelProvider
+    lateinit var viewModelProvider: MyViewModelFactory
 
     private lateinit var dataBinding: FragmentPostMenuBinding //Generated automatically
     private lateinit var viewModel: PostMenuViewModel
