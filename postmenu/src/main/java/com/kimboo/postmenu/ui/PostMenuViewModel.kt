@@ -13,15 +13,12 @@ import javax.inject.Inject
  */
 class PostMenuViewModel @Inject constructor(var imgurGalleryRepository: ImgurGalleryRepository) : ViewModel() {
 
-    lateinit var galleryPostList: LiveData<List<ImgurGalleryPost>>
+    val galleryPostList: LiveData<List<ImgurGalleryPost>> =
+            imgurGalleryRepository.retrieveSearchGallery("top", "all", 1, "cats")
 
     var uiEvents = MutableLiveData<String>()
     var networkEvents = imgurGalleryRepository.networkStatus
 
-    fun hookGallerySearch(): LiveData<List<ImgurGalleryPost>> {
-        galleryPostList = imgurGalleryRepository.retrieveSearchGallery("top", "all", 1, "cats")
-        return galleryPostList
-    }
 
     fun onPostButtonClicked() {
     }

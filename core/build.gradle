@@ -14,12 +14,7 @@ dependencies {
     apply from: "$rootDir/baseDependencies.gradle"
 
     //region MultiDex dependency
-    compile 'com.android.support:multidex:1.0.2'
-    //endregion
-    
-    //region Glide dependencies
-    implementation "com.github.bumptech.glide:glide:$libraries.glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$libraries.glideVersion"
+    implementation 'com.android.support:multidex:1.0.2'
     //endregion
 
     //region Room

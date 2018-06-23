@@ -42,6 +42,12 @@ data class ImgurGalleryPost (
 
     @Ignore
     var tags: List<ImgurGalleryTag>? = null
+
+    fun getGalleryCoverImageUrl():String {
+        val coverImage = images?.find { imgurGalleryImage -> imgurGalleryImage.link == cover }
+
+        return coverImage?.let { link } ?: "https://i.imgur.com/$cover.jpg"
+    }
 }
 
 @Entity

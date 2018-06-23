@@ -13,9 +13,7 @@ class PostMenuActivity : AppCompatActivity() {
         setContentView(R.layout.activity_post_menu)
         setSupportActionBar(toolbar)
 
-        postMenuFab.setOnClickListener { view ->
-            startActivity(Intent(this@PostMenuActivity, Class.forName("com.kimboo.postdetail.PostDetailActivity")))
-        }
+        //startActivity(Intent(this@PostMenuActivity, Class.forName("com.kimboo.postdetail.PostDetailActivity")))
     }
 
 }
