@@ -1,6 +1,12 @@
 package com.kimboo.core.model
 
+import android.app.ActionBar
 import android.arch.persistence.room.*
+import android.support.annotation.Dimension
+import android.util.DisplayMetrics
+import android.util.TypedValue
+import android.view.View
+import android.view.ViewGroup
 
 @Entity
 data class ImgurGalleryPost (
@@ -44,9 +50,20 @@ data class ImgurGalleryPost (
     var tags: List<ImgurGalleryTag>? = null
 
     fun getGalleryCoverImageUrl():String {
-        val coverImage = images?.find { imgurGalleryImage -> imgurGalleryImage.link == cover }
+        if (cover.isNullOrBlank()) {
+            return link ?: ""
+        } else {
+            val coverImage = images?.find { imgurGalleryImage -> imgurGalleryImage.link == cover }
+            return coverImage?.let { link } ?: "https://i.imgur.com/$cover.jpg"
+        }
+    }
 
-        return coverImage?.let { link } ?: "https://i.imgur.com/$cover.jpg"
+    fun getCoverWidthInDp(): Int {
+        return coverWidth ?: ViewGroup.LayoutParams.WRAP_CONTENT
+    }
+
+    fun getCoverHeightInDp(): Int {
+        return coverHeight ?: ViewGroup.LayoutParams.WRAP_CONTENT
     }
 }
 

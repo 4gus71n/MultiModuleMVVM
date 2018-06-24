@@ -12,8 +12,9 @@
     <android.support.v7.widget.CardView
         android:layout_margin="4dp"
         app:cardElevation="2dp"
+        app:cardUseCompatPadding="true"
         app:cardCornerRadius="4dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <android.support.constraint.ConstraintLayout
@@ -21,59 +22,65 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                app:imageUrl="@{viewModel.imgurGalleryPost.getGalleryCoverImageUrl()}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:contentDescription="Cover image"
+                android:id="@+id/postMenuItemImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:scaleType="centerCrop"
+                app:cover_height="@{viewModel.imgurGalleryPost.getCoverHeightInDp()}"
+                app:cover_image="@{viewModel.imgurGalleryPost}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 tools:src="@drawable/test" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorBlackOverlay"
-                android:orientation="vertical"
                 android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
+                    android:id="@+id/postMenuItemTitle"
                     style="@style/TextAppearance.AppCompat.Medium.Inverse"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
                     app:text="@{viewModel.imgurGalleryPost.title}"
                     tools:text="Post title Post title Post title Post title Post title Post title" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/postMenuItemLikes"
+                    style="@style/TextAppearance.AppCompat.Small.Inverse"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:drawableStart="@drawable/ic_favorite_24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/postMenuItemTitle"
+                    app:text="@{viewModel.imgurGalleryPost.favoriteCount.toString()}"
+                    tools:text="23" />
 
-                    <com.kimboo.core.ui.CompatTintTextView
-                        style="@style/TextAppearance.AppCompat.Small.Inverse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_favorite_black_24dp"
-                        app:tintColor="@color/colorAccent"
-                        app:text="@{viewModel.imgurGalleryPost.favoriteCount.toString()}"
-                        tools:text="23" />
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Small.Inverse"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:drawableStart="@drawable/ic_comment_24dp"
+                    app:layout_constraintStart_toEndOf="@id/postMenuItemLikes"
+                    app:layout_constraintTop_toBottomOf="@id/postMenuItemTitle"
+                    app:text="@{viewModel.imgurGalleryPost.commentCount.toString()}"
+                    tools:text="45" />
 
-                    <com.kimboo.core.ui.CompatTintTextView
-                        style="@style/TextAppearance.AppCompat.Small.Inverse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:drawableLeft="@drawable/ic_comment_black_24dp"
-                        app:tintColor="@color/colorAccent"
-                        app:text="@{viewModel.imgurGalleryPost.commentCount.toString()}"
-                        tools:text="45" />
 
-                </LinearLayout>
-
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.constraint.ConstraintLayout>
 

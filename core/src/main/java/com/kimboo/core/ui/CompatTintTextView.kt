@@ -12,6 +12,8 @@ import com.kimboo.core.R
 /**
  * Created by Agustin Tomas Larghi on 5/6/2018.
  * Email: agustin.tomas.larghi@gmail.com
+ *
+ * Just making sure that API 21 TextViews are going to tint properly their drawables
  */
 class CompatTintTextView : TextView {
 
