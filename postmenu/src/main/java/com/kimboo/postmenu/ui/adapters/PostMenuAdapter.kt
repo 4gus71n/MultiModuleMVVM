@@ -1,16 +1,11 @@
 package com.kimboo.postmenu.ui.adapters
 
+import android.arch.lifecycle.MutableLiveData
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.bumptech.glide.ListPreloader
-import com.bumptech.glide.RequestBuilder
-import com.kimboo.core.di.module.GlideApp
-import com.kimboo.core.di.module.GlideRequests
 import com.kimboo.core.model.ImgurGalleryPost
 import com.kimboo.postmenu.databinding.ItemViewPostMenuBinding
-import kotlinx.android.synthetic.main.item_view_post_menu.view.*
 import java.util.ArrayList
 
 class PostMenuAdapter() : RecyclerView.Adapter<PostMenuViewHolder>() {
@@ -21,12 +16,18 @@ class PostMenuAdapter() : RecyclerView.Adapter<PostMenuViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+
+    val onClickEvents = MutableLiveData<Pair<PostMenuAdapterEvent, ImgurGalleryPost>>()
+
+    enum class PostMenuAdapterEvent {
+        GALLERY_CLICK, FAVORITE_CLICK
+    }
     //endregion
 
     //region RecyclerView.Adapter methods implementation
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostMenuViewHolder {
         val itemBindings = ItemViewPostMenuBinding.inflate(LayoutInflater.from(parent.context))
-        return PostMenuViewHolder(itemBindings)
+        return PostMenuViewHolder(onClickEvents, itemBindings)
     }
 
     override fun getItemCount(): Int = imgurGalleryPosts.size
@@ -45,14 +46,15 @@ class PostMenuAdapter() : RecyclerView.Adapter<PostMenuViewHolder>() {
 
 
 //region ViewHolder declaration
-class PostMenuViewHolder(val itemBindings: ItemViewPostMenuBinding) : RecyclerView.ViewHolder(itemBindings.root) {
+class PostMenuViewHolder(val callbackEvents: MutableLiveData<Pair<PostMenuAdapter.PostMenuAdapterEvent, ImgurGalleryPost>>,
+                         val itemBindings: ItemViewPostMenuBinding) : RecyclerView.ViewHolder(itemBindings.root) {
     fun onBindModel(imgurPost: ImgurGalleryPost) {
-        itemBindings.viewModel = PostMenuItemViewModel(imgurPost)
+        itemBindings.viewModel = PostMenuItemViewModel(callbackEvents, imgurPost)
         itemBindings.executePendingBindings()
     }
 
     fun onClear() {
-        GlideApp.with(itemBindings.root).clear(itemBindings.root.postMenuItemImageView)
+        //GlideApp.with(itemBindings.root).clear(itemBindings.root.postMenuItemImageView)
     }
 
 }

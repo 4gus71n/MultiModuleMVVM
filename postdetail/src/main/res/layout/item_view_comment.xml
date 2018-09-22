@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="2dp"
+    app:cardCornerRadius="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/commentAvatarImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/test_avatar" />
+
+        <TextView
+            android:id="@+id/commentUsernameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            app:layout_constraintLeft_toRightOf="@id/commentAvatarImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Username Example" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="4dp"
+            app:layout_constraintLeft_toRightOf="@id/commentUsernameTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="6+ hours ago" />
+
+        <TextView
+            android:id="@+id/commentContentTextView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingTop="4dp"
+            app:layout_constraintLeft_toRightOf="@id/commentAvatarImageView"
+            app:layout_constraintTop_toBottomOf="@id/commentUsernameTextView"
+            tools:text="Comment content, Comment content, Comment content, Comment content, Comment content, Comment content." />
+
+        <TextView
+            android:id="@+id/commentUpvotesTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_thumb_up"
+            android:drawableTint="@color/colorAccent"
+            app:layout_constraintLeft_toRightOf="@id/commentContentTextView"
+            app:layout_constraintStart_toStartOf="@+id/commentContentTextView"
+            app:layout_constraintTop_toBottomOf="@id/commentContentTextView"
+            tools:text="23" />
+
+        <TextView
+            android:id="@+id/commentDownvotesTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawableStart="@drawable/ic_thumb_down"
+            android:drawableTint="@color/colorAccent"
+            app:layout_constraintLeft_toRightOf="@id/commentUpvotesTextView"
+            app:layout_constraintStart_toEndOf="@+id/commentUpvotesTextView"
+            app:layout_constraintTop_toBottomOf="@id/commentContentTextView"
+            tools:text="2" />
+
+        <TextView
+            android:id="@+id/commentSettingsTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawableStart="@drawable/ic_more_horiz"
+            android:drawableTint="@color/colorAccent"
+            app:layout_constraintLeft_toRightOf="@id/commentDownvotesTextView"
+            app:layout_constraintStart_toEndOf="@+id/commentDownvotesTextView"
+            app:layout_constraintTop_toBottomOf="@id/commentContentTextView" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,11 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
 
 apply from: "$rootDir/baseAndroid.gradle"
 
 dependencies {
-    implementation project(':core')
+    api project(':core')
     apply from: "$rootDir/baseDependencies.gradle"
 }

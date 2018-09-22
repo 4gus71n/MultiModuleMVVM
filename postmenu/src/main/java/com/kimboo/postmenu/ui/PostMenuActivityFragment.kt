@@ -2,22 +2,17 @@ package com.kimboo.postmenu.ui
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.graphics.Canvas
-import android.graphics.Rect
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.kimboo.core.MyApp
-import com.kimboo.core.di.module.GlideApp
 import com.kimboo.core.di.module.MyViewModelFactory
-import com.kimboo.core.model.ImgurGalleryPost
+import com.kimboo.core.utils.MyAppIntents
 import com.kimboo.postmenu.R
 import com.kimboo.postmenu.databinding.FragmentPostMenuBinding
 import com.kimboo.postmenu.di.DaggerPostMenuComponent
@@ -59,11 +54,27 @@ class PostMenuActivityFragment : Fragment() {
 
         val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         staggeredGridLayoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+
         postMenuRecyclerView.layoutManager = staggeredGridLayoutManager
         staggeredGridLayoutManager.isItemPrefetchEnabled = true
         postMenuAdapter = PostMenuAdapter()
 
         postMenuRecyclerView.adapter = postMenuAdapter
+
+        postMenuAdapter.onClickEvents.observe(this, Observer {
+            it?.let { event ->
+                when (event.first) {
+                    PostMenuAdapter.PostMenuAdapterEvent.GALLERY_CLICK -> {
+                        //TODO CLEAN
+                        val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(activity!!)
+                        startActivity(MyAppIntents.getPostDetailIntent(context!!, it.second), activityOptions.toBundle())
+                    }
+                    PostMenuAdapter.PostMenuAdapterEvent.FAVORITE_CLICK -> {
+                        //TODO
+                    }
+                }
+            }
+        })
 
         viewModel.networkEvents.observe(this, Observer { networkEvent ->
             Log.d("SARASA", networkEvent)

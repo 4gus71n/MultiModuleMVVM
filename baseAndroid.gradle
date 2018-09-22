@@ -3,6 +3,10 @@
  */
 apply from: "$rootDir/baseExt.gradle"
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion versions.compileSdkVersion
 
@@ -55,6 +59,10 @@ android {
 
     compileOptions {
         incremental = true //Enables incremental builds so we don't need to rebuild unchanged modules
+    }
+
+    androidExtensions {
+        experimental = true //Enables @Parcelize and other extensions
     }
 
     dataBinding.enabled = true

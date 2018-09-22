@@ -2,13 +2,15 @@ package com.kimboo.core.model
 
 import android.app.ActionBar
 import android.arch.persistence.room.*
+import android.os.Parcelable
 import android.support.annotation.Dimension
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.parcel.Parcelize
 
-@Entity
+@Entity @Parcelize
 data class ImgurGalleryPost (
         @PrimaryKey
         var id: String,
@@ -41,7 +43,7 @@ data class ImgurGalleryPost (
         var inGallery: Boolean?,
         var isAd: Boolean?,
         var inMostViral: Boolean?
-) {
+): Parcelable  {
     //TODO Room @Ignore field doesn't work if it's declared as a constructor argument
     @Ignore
     var images: List<ImgurGalleryImage>? = null
@@ -58,13 +60,6 @@ data class ImgurGalleryPost (
         }
     }
 
-    fun getCoverWidthInDp(): Int {
-        return coverWidth ?: ViewGroup.LayoutParams.WRAP_CONTENT
-    }
-
-    fun getCoverHeightInDp(): Int {
-        return coverHeight ?: ViewGroup.LayoutParams.WRAP_CONTENT
-    }
 }
 
 @Entity

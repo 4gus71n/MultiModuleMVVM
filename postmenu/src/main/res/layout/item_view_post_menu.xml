@@ -22,13 +22,14 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:transitionName="@{viewModel.imgurGalleryPost.id}"
+                android:onClick="@{() -> viewModel.onImgurGalleryClicked()}"
                 android:contentDescription="Cover image"
                 android:id="@+id/postMenuItemImageView"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
-                app:cover_height="@{viewModel.imgurGalleryPost.getCoverHeightInDp()}"
-                app:cover_image="@{viewModel.imgurGalleryPost}"
+                app:coverImage="@{viewModel.imgurGalleryPost}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
